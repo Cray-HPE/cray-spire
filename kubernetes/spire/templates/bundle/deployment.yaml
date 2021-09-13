@@ -1,14 +1,11 @@
-{{- if .Values.bundle.enabled }}
----
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: {{ include "spire.fullname" . }}-bundle
   labels:
     app.kubernetes.io/name: {{ template "spire.name" . }}-bundle
     {{- include "spire.common-labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.bundle.replicaCount }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ template "spire.name" . }}-bundle
@@ -22,18 +19,6 @@ spec:
         app.kubernetes.io/name: {{ template "spire.name" . }}-bundle
     spec:
       serviceAccountName: {{ include "spire.name" . }}-bundle
-      affinity:
-          podAntiAffinity:
-             preferredDuringSchedulingIgnoredDuringExecution:
-               - weight: 1
-                 podAffinityTerm:
-                   labelSelector:
-                     matchExpressions:
-                     - key: app
-                       operator: In
-                       values:
-                       - {{ include "spire.name" . }}-bundle
-                   topologyKey: kubernetes.io/hostname
       containers:
         - name: {{ template "spire.name" . }}-bundle
           image: "{{ .Values.bundle.image.repository }}:{{ .Values.bundle.image.tag | default .Chart.AppVersion }}"
@@ -63,4 +48,3 @@ spec:
         - name: spire-bundle
           configMap:
             name: spire-bundle
-{{- end }}
