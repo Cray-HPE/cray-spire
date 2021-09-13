@@ -42,8 +42,8 @@ server:
     pullPolicy: IfNotPresent
 
   registration:
-    repository: dtr.dev.cray.com/cray/cray-spire-tokens
-    tag: 0.4.0
+    repository: dtr.dev.cray.com/cray/spire-tokens
+    tag: 0.4.1
     pullPolicy: IfNotPresent
 
   persistentVolume:
