@@ -38,7 +38,7 @@ server:
 
   image:
     repository: gcr.io/spiffe-io/spire-server
-    tag: 0.12.0-csm0.9
+    tag: 0.12.2-csm0.9
     pullPolicy: IfNotPresent
 
   registration:
