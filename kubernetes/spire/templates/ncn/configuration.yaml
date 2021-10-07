@@ -10,7 +10,11 @@ data:
     agent {
       data_dir = "/root/spire"
       log_level = "INFO"
+      {{- if .Values.server.lbOnly }}
+      server_address = "{{ .Values.server.lbIP }}"
+      {{- else }}
       server_address = "{{ .Values.server.fqdn }}"
+      {{- end }}
       server_port = "8081"
       socket_path = "/root/spire/agent.sock"
       trust_bundle_path = "/root/spire/conf/bundle.crt"

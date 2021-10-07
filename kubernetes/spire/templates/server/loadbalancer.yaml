@@ -6,7 +6,11 @@ metadata:
   name: {{ template "spire.name" . }}-lb
 spec:
   loadBalancerIP: {{ .Values.server.lbIP }}
+  {{- if .Values.server.lbOnly }}
+  externalTrafficPolicy: Cluster
+  {{- else }}
   externalTrafficPolicy: Local
+  {{- end }}
   ports:
   - name: spire-server
     port: 8081
