@@ -10,6 +10,7 @@ trustDomain: shasta
 server:
   replicaCount: 3
   lbIP: "10.92.100.82"
+  lbOnly: false
   fqdn: spire.local
   port: 8081
   logLevel: INFO
