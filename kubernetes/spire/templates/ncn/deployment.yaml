@@ -40,10 +40,15 @@ spec:
           args:
             - '-x'
             - '-c'
-            - 'while ! curl -k -X POST -d type=ncn\&xname=$(cat /proc/cmdline | sed "s/.*xname=\([A-Za-z0-9]*\).*/\1/") "$URL" > /tmp/token; do sleep 5; done; if ! grep -qi error /tmp/token; then echo "join_token=$(cat /tmp/token | cut -d\" -f4)" > "/token/{{ .Values.ncn.filename }}";fi; cat /config/spire-agent.conf > /token/spire-agent.conf ; while true; do if test -e /bundle/bundle.crt; then cat /bundle/bundle.crt > /token/bundle.crt; break; fi; sleep 10; done'
+            - 'if grep -q xname /proc/cmdline; then XNAME=$(cat /proc/cmdline | sed "s/.*xname=\([A-Za-z0-9]*\).*/\1/"); else XNAME=$(echo $NODE_NAME | tr -d \-); fi; while ! curl -k -X POST -d type=ncn\&xname=$XNAME "$URL" > /tmp/token; do sleep 5; done; if ! grep -qi error /tmp/token; then echo "join_token=$(cat /tmp/token | cut -d\" -f4)" > "/token/{{ .Values.ncn.filename }}";fi; cat /config/spire-agent.conf > /token/spire-agent.conf ; while true; do if test -e /bundle/bundle.crt; then cat /bundle/bundle.crt > /token/bundle.crt; break; fi; sleep 10; done'
+              
           env:
             - name: URL
               value: "{{ .Values.ncn.url }}"
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
           volumeMounts:
             - name: token
               mountPath: /token
