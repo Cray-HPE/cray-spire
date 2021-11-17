@@ -149,7 +149,7 @@ bss:
 ncn:
   url: https://spire-tokens.spire:54440/api/token
   filename: join_token
-  path: /root/spire/conf
+  path: /var/lib/spire/conf
   init:
     repository: dtr.dev.cray.com/baseos/alpine
     tag: 3.12

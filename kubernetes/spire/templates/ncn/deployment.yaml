@@ -60,7 +60,7 @@ spec:
           args:
             - '-x'
             - '-c'
-            - 'chown root:root /token/{{ .Values.ncn.filename }} /token/spire-agent.conf /token/bundle.crt'
+            - 'chown spire:spire /token/{{ .Values.ncn.filename }} /token/spire-agent.conf /token/bundle.crt'
           volumeMounts:
             - name: token
               mountPath: /token
