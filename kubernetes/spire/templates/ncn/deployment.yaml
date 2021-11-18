@@ -29,7 +29,7 @@ spec:
           args:
             - '-x'
             - '-c'
-            - 'touch /token/{{ .Values.ncn.filename }} /token/spire-agent.conf /token/bundle.crt; chown 100:101 /token/{{ .Values.ncn.filename }} /token/spire-agent.conf /token/bundle.crt'
+            - 'touch /token/{{ .Values.ncn.filename }} /token/spire-agent.conf /token/bundle.crt; chown 100:101 /token/{{ .Values.ncn.filename }} /token/spire-agent.conf /token/bundle.crt; chmod 660 /token/{{ .Values.ncn.filename }} /token/spire-agent.conf /token/bundle.crt'
           volumeMounts:
             - name: token
               mountPath: /token
@@ -60,10 +60,13 @@ spec:
           args:
             - '-x'
             - '-c'
-            - 'chown spire:spire /token/{{ .Values.ncn.filename }} /token/spire-agent.conf /token/bundle.crt'
+            - 'if grep -q spire /passwd; then chown $(grep spire /passwd | cut -d: -f3):$(grep spire /passwd | cut -d: -f4) /token/{{ .Values.ncn.filename }} /token/spire-agent.conf /token/bundle.crt; else chown root:root /token/{{ .Values.ncn.filename }} /token/spire-agent.conf /token/bundle.crt; fi; chmod 440 /token/{{ .Values.ncn.filename }} /token/spire-agent.conf /token/bundle.crt'
           volumeMounts:
             - name: token
               mountPath: /token
+            - name: passwd
+              mountPath: /passwd
+              readOnly: true
       containers:
         - name: pause
           image: "{{ .Values.ncn.pause.repository }}:{{ .Values.ncn.pause.tag }}"
@@ -78,3 +81,7 @@ spec:
         - name: spire-bundle
           configMap:
             name: spire-bundle
+        - name: passwd
+          hostPath:
+            path: /etc/passwd
+            type: File

@@ -9,7 +9,8 @@ spec:
   - NET_RAW
   allowedHostPaths:
   - pathPrefix: /run/spire
-  - pathPrefix: /root/spire/conf
+  - pathPrefix: /var/lib/spire/conf
+  - pathPrefix: /etc/passwd
   fsGroup:
     ranges:
     - max: 65535

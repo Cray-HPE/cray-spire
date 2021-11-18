@@ -12,7 +12,7 @@ data:
       log_level = "INFO"
       server_address = "{{ .Values.server.fqdn }}"
       server_port = "8081"
-      socket_path = "/var/run/spire/agent.sock"
+      socket_path = "/var/lib/spire/agent.sock"
       trust_bundle_path = "/var/lib/spire/conf/bundle.crt"
       trust_domain = "{{ .Values.trustDomain }}"
       join_token = "$join_token"
