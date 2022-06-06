@@ -103,10 +103,10 @@ spec:
                                   "labelSelector": {
                                       "matchExpressions": [
                                           {
-                                              "key": "app.kubernetes.io/name",
+                                              "key": "connection-pooler",
                                               "operator": "In",
                                               "values": [
-                                                  "spire-jwks"
+                                                  "{{ include "spire.fullname" . }}-postgres-pooler"
                                               ]
                                           }
                                       ]
