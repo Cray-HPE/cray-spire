@@ -29,6 +29,7 @@ global:
     version: ""  # set at deploy time automatically, no need to ever set explicitly
 
 trustDomain: shasta
+vshasta: false
 
 server:
   replicaCount: 3
