@@ -25,8 +25,8 @@ nameOverride: ""
 
 global:
   chart:
-    name: ""     # set at deploy time automatically, no need to ever set explicitly
-    version: ""  # set at deploy time automatically, no need to ever set explicitly
+    name: "" # set at deploy time automatically, no need to ever set explicitly
+    version: "" # set at deploy time automatically, no need to ever set explicitly
 
 trustDomain: shasta
 vshasta: false
@@ -64,7 +64,7 @@ server:
 
   init2:
     repository: alpine
-    tag: 3.14
+    tag: 3.16
     pullPolicy: IfNotPresent
 
   image:
@@ -79,7 +79,7 @@ server:
 
   persistentVolume:
     accessModes:
-    - ReadWriteOnce
+      - ReadWriteOnce
     size: 1Gi
     storageClass: ""
 
@@ -115,7 +115,7 @@ cray-service:
       statement_timeout: "60000"
     backup:
       enabled: true
-      schedule: "10 3 * * *"  # Once per day at 3:10AM
+      schedule: "10 3 * * *" # Once per day at 3:10AM
 
 tls:
   issuer: cert-manager-issuer-common
@@ -131,7 +131,7 @@ agent:
 
   init2:
     repository: alpine
-    tag: 3.14
+    tag: 3.16
     pullPolicy: IfNotPresent
 
   image:
@@ -181,7 +181,7 @@ ncn:
   path: /var/lib/spire
   init:
     repository: alpine
-    tag: 3.14
+    tag: 3.16
   curl:
     repository: artifactory.algol60.net/csm-docker/stable/docker.io/curlimages/curl
     tag: 7.80.0
