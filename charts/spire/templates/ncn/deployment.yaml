@@ -101,7 +101,7 @@ spec:
       volumes:
         - name: token
           hostPath:
-            path: "{{ .Values.ncn.path }}"
+            path: "{{ .Values.ncn.path }}/conf"
             type: DirectoryOrCreate
         - name: {{ template "spire.name" . }}-config
           configMap:

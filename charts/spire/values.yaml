@@ -178,7 +178,7 @@ bss:
 ncn:
   url: https://spire-tokens.spire:54440/api/token
   filename: join_token
-  path: /root/spire/conf
+  path: /var/lib/spire
   init:
     repository: alpine
     tag: 3.14
