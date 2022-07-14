@@ -90,6 +90,12 @@ spec:
       containers:
         - name: pause
           image: "{{ .Values.ncn.pause.repository }}:{{ .Values.ncn.pause.tag }}"
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            runAsNonRoot: true
+            runAsGroup: 65534
+            runAsUser: 65534
       volumes:
         - name: token
           hostPath:

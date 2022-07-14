@@ -101,6 +101,10 @@ spec:
             - name: spire-db-creds
               mountPath: /run/spire/db-creds
               readOnly: true
+        - name: init-wait-on-pooler
+          image: "{{ .Values.server.init.repository }}:{{ .Values.server.init.tag }}"
+          imagePullPolicy: {{ .Values.server.init.pullPolicy }}
+          args: ["-t", "120", "spire-postgres-pooler.spire.svc.cluster.local:5432"]
       containers:
         - name: {{ include "spire.name" . }}-server
           image: "{{ .Values.server.image.repository }}:{{ .Values.server.image.tag }}"
@@ -118,12 +122,12 @@ spec:
             - name: grpc
               containerPort: {{ .Values.server.port }}
               protocol: TCP
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - "/bin/sh"
-                  - "/run/spire/config/register"
+#          lifecycle:
+#            postStart:
+#              exec:
+#                command:
+#                  - "/bin/sh"
+#                  - "/run/spire/config/register" # note: this fails to run. needs debugging. this script is defined in configuration.yaml
           livenessProbe:
             tcpSocket:
               port: grpc
