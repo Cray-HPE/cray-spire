@@ -21,8 +21,42 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 #
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-nodes:
-  - role: control-plane
-    image: kindest/node:v1.20.15@sha256:723256355216daf57d92fb12a209181badb6db635b804372d475d7117d60add2
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ include "spire.name" . }}-jwks
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - services/services-gateway
+  http:
+  - headers:
+      response:
+        set:
+          Cache-Control: max-age=300
+        remove:
+        - expires
+        - pragma
+    match:
+    - method:
+        exact: GET
+      uri:
+        exact: /{{ .Values.jwks.uriPrefix }}/keys
+    rewrite:
+      uri: /keys
+    route:
+    - destination:
+        host: {{ include "spire.name" . }}-jwks
+        port:
+          number: {{ .Values.jwks.port }}
+  - match:
+    - uri:
+        prefix: /{{ .Values.jwks.uriPrefix }}/
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: {{ include "spire.name" . }}-jwks
+        port:
+          number: {{ .Values.jwks.port }}
