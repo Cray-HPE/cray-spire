@@ -140,7 +140,7 @@ data:
     }
 
     # Wait for the socket to appear
-    while [ ! -S /tmp/spire-registration.sock ]; do
+    while [ ! -S /tmp/spire-server/private/api.sock ]; do
       echo "Waiting for registration socket"
       sleep 3
     done
