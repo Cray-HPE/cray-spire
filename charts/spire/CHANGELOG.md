@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [2.6.6]
+### Changed
+- Bump spire chart version to use cray-postgres-db-backup:0.2.3 to fix the postgres db restore issue. (CASMPET-5966)
+
 ## [2.5.0]
 ### Changed
 - Bump spire chart version to use spire-tokens:2.1.0 for CVE remediation (CASMINST-4505)
