@@ -1,0 +1,614 @@
+#
+# MIT License
+#
+# (C) Copyright [2022] Hewlett Packard Enterprise Development LP
+#
+# Permission is hereby granted, free of charge, to any person obtaining a
+# copy of this software and associated documentation files (the "Software"),
+# to deal in the Software without restriction, including without limitation
+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
+# and/or sell copies of the Software, and to permit persons to whom the
+# Software is furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included
+# in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+# OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+# ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+#
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "spire.fullname" . }}-workloads
+  labels:
+    app.kubernetes.io/name: {{ template "spire.name" . }}
+    {{- include "spire.common-labels" . | nindent 4 }}
+data:
+  ncn.yaml: |-
+      ---
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/cpsmount_helper
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cps-utils/bin/cpsmount_helper
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/cpsmount
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/cpsmount-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/heartbeat
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/heartbeat-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/orca
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/orca-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/ckdump
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/ckdump-spire-agent
+        ttl: 864000
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/bos-reporter
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/bos-reporter-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/cfs-state-reporter
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/cfs-state-reporter-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/dvs-map
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/dvs-map-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/dvs-hmi
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/dvs-hmi-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/heartbeat
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/heartbeat-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/cpsmount
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/cpsmount-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/heartbeat
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/heartbeat-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/orca
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/orca-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/ckdump
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/ckdump-spire-agent
+        ttl: 864000
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/bos-reporter
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/bos-reporter-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/cfs-state-reporter
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/cfs-state-reporter-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/dvs-map
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/dvs-map-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/dvs-hmi
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/dvs-hmi-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/heartbeat
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/heartbeat-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/tpm-provisioner
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/tpm-provisioner
+  compute.yaml: |-
+      ---
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/cpsmount_helper
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cps-utils/bin/cpsmount_helper
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/cpsmount
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/cpsmount-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/heartbeat
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/heartbeat-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/orca
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/orca-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/ckdump_helper
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/ckdump_helper
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/ckdump
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/ckdump-spire-agent
+        ttl: 864000
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/bos-reporter
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/bos-reporter-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/cfs-state-reporter
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/cfs-state-reporter-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/dvs-map
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/dvs-map-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/dvs-hmi
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/dvs-hmi-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/heartbeat
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/heartbeat-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/wlm
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/wlm-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/cpsmount
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/cpsmount-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/heartbeat
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/heartbeat-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/orca
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/orca-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/ckdump_helper
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/ckdump_helper
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/ckdump
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/ckdump-spire-agent
+        ttl: 864000
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/bos-reporter
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/bos-reporter-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/cfs-state-reporter
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/cfs-state-reporter-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/dvs-map
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/dvs-map-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/dvs-hmi
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/dvs-hmi-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/heartbeat
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/heartbeat-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/wlm
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/wlm-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/tpm-provisioner
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/tpm-provisioner
+  storage.yaml: |-
+      ---
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/storage/XNAME/workload/cfs-state-reporter
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/cfs-state-reporter-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/storage/XNAME/workload/heartbeat
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/heartbeat-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/storage/XNAME/workload/cfs-state-reporter
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/cfs-state-reporter-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/storage/XNAME/workload/heartbeat
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/heartbeat-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/storage/XNAME/workload/tpm-provisioner
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/tpm-provisioner
+  uan.yaml: |-
+      ---
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/cpsmount_helper
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cps-utils/bin/cpsmount_helper
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/cpsmount
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/cpsmount-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/heartbeat
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/heartbeat-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/orca
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/orca-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/ckdump_helper
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/ckdump_helper
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/ckdump
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/ckdump-spire-agent
+        ttl: 864000
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/bos-reporter
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/bos-reporter-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/cfs-state-reporter
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/cfs-state-reporter-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/dvs-map
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/dvs-map-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/dvs-hmi
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/dvs-hmi-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/heartbeat
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/usr/bin/heartbeat-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/cpsmount
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/cpsmount-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/heartbeat
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/heartbeat-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/orca
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/orca-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/ckdump_helper
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/ckdump_helper
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/ckdump
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/ckdump-spire-agent
+        ttl: 864000
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/bos-reporter
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/bos-reporter-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/cfs-state-reporter
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/cfs-state-reporter-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/dvs-map
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/dvs-map-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/dvs-hmi
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/dvs-hmi-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/heartbeat
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/heartbeat-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/tpm-provisioner
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/tpm-provisioner
