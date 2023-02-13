@@ -26,7 +26,7 @@ kind: ConfigMap
 metadata:
   name: {{ include "spire.name" . }}-nginx
 data:
-  spire-jwks-nginx.conf: |-
+  jwks-nginx.conf: |-
     daemon off;
     events {}
     http {

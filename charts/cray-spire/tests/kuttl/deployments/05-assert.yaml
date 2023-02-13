@@ -25,7 +25,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   annotations:
-    meta.helm.sh/release-name: spire
+    meta.helm.sh/release-name: cray-spire
     meta.helm.sh/release-namespace: spire
   name: request-ncn-join-token
   namespace: spire

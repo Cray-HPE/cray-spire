@@ -24,7 +24,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: access-spire
+  name: access-{{ include "spire.fullname" . }}
 spec:
   podSelector:
     matchLabels:
@@ -43,17 +43,17 @@ spec:
       # request-ncn-join-token joins kubernetes NCNs via a daemonset
       - namespaceSelector:
           matchLabels:
-            name: spire
+            name: {{ include "spire.fullname" . }}
         podSelector:
           matchLabels:
             name: request-ncn-join-token
       # joining storage NCNs uses a spire-server pod to request tokens
       - namespaceSelector:
           matchLabels:
-            name: spire
+            name: {{ include "spire.fullname" . }}
         podSelector:
           matchLabels:
-            app.kubernetes.io/name: spire-server
+            app.kubernetes.io/name: {{ include "spire.fullname" . }}-server
       ports:
         - protocol: TCP
           port: 54440

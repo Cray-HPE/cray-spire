@@ -26,7 +26,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: cray-sysmgmt-health-spire-server
+  name: cray-sysmgmt-health-{{ include "spire.fullname" . }}-server
   namespace: sysmgmt-health
   labels:
     release: cray-sysmgmt-health
@@ -37,8 +37,8 @@ spec:
     scheme: http
   namespaceSelector:
     matchNames:
-    - spire
+    - {{ include "spire.fullname" . }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: spire-server
+      app.kubernetes.io/name: {{ include "spire.fullname" . }}-server
 {{- end }}

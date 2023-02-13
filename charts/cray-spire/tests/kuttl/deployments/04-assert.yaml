@@ -24,7 +24,7 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: spire-agent
+  name: cray-spire-agent
   namespace: spire
 status:
   numberReady: 1

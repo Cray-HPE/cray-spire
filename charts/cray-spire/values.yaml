@@ -33,11 +33,11 @@ vshasta: false
 
 server:
   replicaCount: 3
-  lbIP: "10.92.100.82"
-  fqdn: spire.local
+  lbIP: "10.92.100.83"
+  fqdn: crayspire.local
   port: 8081
   logLevel: INFO
-  jwtIssuer: http://spire.local/shasta/vshastaio
+  jwtIssuer: http://crayspire.local/shasta
   caTTL: 2160h
   svidDefaultTTL: 12h
   database: spire
@@ -85,7 +85,7 @@ server:
 
 cray-service:
   type: ""
-  nameOverride: spire
+  nameOverride: cray-spire
   service:
     enabled: false
   sqlCluster:
@@ -122,7 +122,7 @@ tls:
 
 agent:
   logLevel: INFO
-  wlSocket: /run/spire/vshastaio/sockets
+  wlSocket: /run/cray-spire/sockets
 
   init:
     repository: artifactory.algol60.net/csm-docker/stable/sdlc-ops/wait-for-it
@@ -141,7 +141,7 @@ agent:
 
 jwks:
   domain: vshasta.io
-  uriPrefix: spire-jwks-vshastaio
+  uriPrefix: spire-jwks
   logLevel: INFO
   port: 80
   replicaCount: 3
@@ -157,18 +157,6 @@ jwks:
     tag: 1.18.0-alpine
     pullPolicy: IfNotPresent
 
-bundle:
-  enabled: false
-  uriPrefix: spire-bundle
-  logLevel: INFO
-  port: 8080
-  replicaCount: 3
-
-  image:
-    repository: artifactory.algol60.net/csm-docker/stable/spire-bundle
-    tag: 0.2.0
-    pullPolicy: IfNotPresent
-
 bss:
   endpoint: http://cray-bss.services.svc.cluster.local/boot/v1/bootparameters
   curl:
@@ -176,7 +164,7 @@ bss:
     tag: 7.80.0
 
 ncn:
-  url: https://spire-tokens.spire:54440/api/token
+  url: https://cray-spire-tokens.spire:54440/api/token
   filename: join_token
   path: /var/lib/spire
   init:

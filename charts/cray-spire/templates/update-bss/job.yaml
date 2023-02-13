@@ -35,7 +35,7 @@ spec:
     spec:
       serviceAccountName: {{ include "spire.fullname" . }}-update-bss
       containers:
-        - name: {{ template "spire.name" . }}-update-bss
+        - name: update-bss
           image: "{{ .Values.bss.curl.repository }}:{{ .Values.bss.curl.tag }}"
           command:
             - '/bin/sh'
@@ -63,4 +63,4 @@ spec:
       volumes:
         - name: conf
           configMap:
-            name: spire-bss-config
+            name: {{ include "spire.fullname" . }}-bss-config

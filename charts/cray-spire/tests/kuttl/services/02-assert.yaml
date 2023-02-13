@@ -25,14 +25,14 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    meta.helm.sh/release-name: spire
+    meta.helm.sh/release-name: cray-spire
     meta.helm.sh/release-namespace: spire
-  name: spire-lb
+  name: cray-spire-lb
   namespace: spire
 spec:
   externalTrafficPolicy: Local
   ports:
-    - name: spire-server
+    - name: cray-spire-server
       port: 8081
       protocol: TCP
       targetPort: 8081

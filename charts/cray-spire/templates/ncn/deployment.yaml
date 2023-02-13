@@ -84,7 +84,7 @@ spec:
             - name: {{ template "spire.name" . }}-config
               mountPath: /config
               readOnly: true
-            - name: spire-bundle
+            - name: {{ include "spire.fullname" . }}-bundle
               mountPath: /bundle
               readOnly: true
         - name: init-restoreperms
@@ -109,6 +109,6 @@ spec:
         - name: {{ template "spire.name" . }}-config
           configMap:
             name: {{ template "spire.name" . }}-ncn-config
-        - name: spire-bundle
+        - name: {{ include "spire.fullname" . }}-bundle
           configMap:
-            name: spire-bundle
+            name: {{ include "spire.fullname" . }}-bundle

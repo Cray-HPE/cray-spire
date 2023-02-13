@@ -36,7 +36,7 @@ spec:
     - port: {{ .Values.server.port }}
       targetPort: {{ .Values.server.port }}
       protocol: TCP
-      name: https-spire-server
+      name: https-{{ include "spire.fullname" . }}-server
   selector:
     app.kubernetes.io/name: {{ template "spire.name" . }}-server
 ---
@@ -53,6 +53,6 @@ spec:
     - port: {{ .Values.server.registrationPort }}
       targetPort: {{ .Values.server.registrationPort }}
       protocol: TCP
-      name: https-spire-tokens
+      name: https-{{ include "spire.fullname" . }}-tokens
   selector:
     app.kubernetes.io/name: {{ template "spire.name" . }}-server

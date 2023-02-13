@@ -29,7 +29,7 @@ metadata:
     app.kubernetes.io/name: {{ template "spire.name" . }}
     {{- include "spire.common-labels" . | nindent 4 }}
 data:
-  spire-server.conf: |-
+  server.conf: |-
     server {
       ratelimit = {
         attestation = false
@@ -98,6 +98,7 @@ data:
       Notifier "k8sbundle" {
         plugin_data {
           namespace = "{{ .Release.Namespace }}"
+          config_map = "{{ include "spire.fullname" .  }}-bundle"
         }
       }
     }
@@ -167,9 +168,9 @@ data:
         -parentID spiffe://{{ .Values.trustDomain }}/cluster \
         -spiffeID spiffe://{{ .Values.trustDomain }}/spire-jwks \
         -selector k8s:ns:{{ .Release.Namespace }} \
-        -selector k8s:sa:spire-jwks \
-        -selector k8s:pod-label:app.kubernetes.io/name:spire-jwks \
-        -selector k8s:container-name:spire-jwks
+        -selector k8s:sa:{{ include "spire.fullname" . }}-jwks \
+        -selector k8s:pod-label:app.kubernetes.io/name:{{ include "spire.fullname" . }}-jwks \
+        -selector k8s:container-name:jwks
     fi
 
     {{- if not .Values.server.tokenService.enableXNameWorkloads }}

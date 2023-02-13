@@ -88,7 +88,7 @@ spec:
             - deployment
             - -n
             - {{ .Release.Namespace }}
-            - spire-postgres-pooler
+            - {{ include "spire.fullname" . }}-postgres-pooler
             - -p
             - |
               {

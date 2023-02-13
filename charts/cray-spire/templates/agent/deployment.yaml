@@ -57,7 +57,7 @@ spec:
             - '-c'
             - 'chown -R 65534:65534 /run/spire/sockets'
           volumeMounts:
-            - name: {{ template "spire.name" . }}-socket
+            - name: socket
               mountPath: /run/spire/sockets
               readOnly: false
         - name: init
@@ -66,24 +66,24 @@ spec:
           # from https://github.com/Cray-HPE/container-images
           image: "{{ .Values.agent.init.repository }}:{{ .Values.agent.init.tag }}"
           imagePullPolicy: {{ .Values.agent.init.pullPolicy }}
-          args: ["-t", "30", "spire-server:{{ .Values.server.port }}"]
+          args: ["-t", "30", "{{ include "spire.fullname" . }}-server:{{ .Values.server.port }}"]
       containers:
-        - name: {{ template "spire.name" . }}
+        - name: "agent"
           securityContext:
             runAsUser: 65534
             runAsGroup: 65534
             runAsNonRoot: true
           image: "{{ .Values.agent.image.repository }}:{{ .Values.agent.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.agent.image.pullPolicy }}
-          args: ["-config", "/run/spire/config/spire-agent.conf"]
+          args: ["-config", "/run/spire/config/agent.conf"]
           volumeMounts:
-            - name: {{ template "spire.name" . }}-config
+            - name: config
               mountPath: /run/spire/config
               readOnly: true
-            - name: spire-bundle
+            - name: bundle
               mountPath: /run/spire/bundle
               readOnly: true
-            - name: {{ template "spire.name" . }}-socket
+            - name: socket
               mountPath: /run/spire/sockets
               readOnly: false
           livenessProbe:
@@ -94,13 +94,13 @@ spec:
             periodSeconds: 60
             timeoutSeconds: 3
       volumes:
-        - name: {{ template "spire.name" . }}-config
+        - name: config
           configMap:
             name: {{ template "spire.name" . }}-agent-config
-        - name: spire-bundle
+        - name: bundle
           configMap:
-            name: spire-bundle
-        - name: {{ template "spire.name" . }}-socket
+            name: {{ include "spire.fullname" . }}-bundle
+        - name: socket
           hostPath:
             path: {{ .Values.agent.wlSocket }}
             type: DirectoryOrCreate

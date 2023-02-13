@@ -25,9 +25,9 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   annotations:
-    meta.helm.sh/release-name: spire
+    meta.helm.sh/release-name: cray-spire
     meta.helm.sh/release-namespace: spire
-  name: spire-server
+  name: cray-spire-server
   namespace: spire
 spec:
   replicas: 1

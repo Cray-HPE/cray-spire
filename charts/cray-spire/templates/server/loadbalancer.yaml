@@ -31,7 +31,7 @@ spec:
   loadBalancerIP: {{ .Values.server.lbIP }}
   externalTrafficPolicy: Local
   ports:
-  - name: spire-server
+  - name: {{ include "spire.fullname" . }}-server
     port: 8081
     targetPort: 8081
     protocol: TCP

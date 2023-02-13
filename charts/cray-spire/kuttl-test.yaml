@@ -34,9 +34,9 @@ commands:
   - command: kubectl apply -f ./tests/kuttl/peerauthentications.security.istio.io.yaml
   - command: kubectl apply -f ./tests/kuttl/certificates.cert-manager.io.yaml
   - command: kubectl apply -f ./tests/kuttl/servicemonitors.monitoring.coreos.com.yaml
-  - command: kubectl apply -f ./tests/kuttl/spire-tokens-tls.yaml
+  - command: kubectl apply -f ./tests/kuttl/cray-spire-tokens-tls.yaml
   - command: helm install --wait --namespace services cray-postgres-operator algol60/cray-postgres-operator
-  - command: helm install -f ./tests/kuttl/values.yaml --namespace spire spire .
+  - command: helm install -f ./tests/kuttl/values.yaml --namespace spire cray-spire .
   # Wait 200 seconds for pods to come up.
   - command: ./tests/kuttl/wait-for-pods.sh
 testDirs:

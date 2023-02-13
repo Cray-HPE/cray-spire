@@ -37,6 +37,6 @@ spec:
       - {{ .Values.server.fqdn }}
     route:
     - destination:
-        host: spire-server
+        host: {{ include "spire.fullname" . }}-server
         port:
           number: 8081

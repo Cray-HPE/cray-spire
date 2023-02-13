@@ -29,11 +29,11 @@ metadata:
     app.kubernetes.io/name: {{ template "spire.name" . }}-agent
     {{- include "spire.common-labels" . | nindent 4 }}
 data:
-  spire-agent.conf: |-
+  agent.conf: |-
     agent {
       data_dir = "/tmp/spire"
       log_level = "{{ .Values.agent.logLevel }}"
-      server_address = "spire-server"
+      server_address = "{{ include "spire.fullname" . }}-server"
       server_port = "{{ .Values.server.port }}"
       socket_path = "/run/spire/sockets/agent.sock"
       trust_bundle_path = "/run/spire/bundle/bundle.crt"

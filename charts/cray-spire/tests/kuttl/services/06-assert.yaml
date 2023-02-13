@@ -25,13 +25,13 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    meta.helm.sh/release-name: spire
+    meta.helm.sh/release-name: cray-spire
     meta.helm.sh/release-namespace: spire
-  name: spire-server
+  name: cray-spire-server
   namespace: spire
 spec:
   ports:
-    - name: https-spire-server
+    - name: https-cray-spire-server
       port: 8081
       protocol: TCP
       targetPort: 8081

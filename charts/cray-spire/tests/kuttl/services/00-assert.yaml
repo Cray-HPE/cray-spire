@@ -25,15 +25,15 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    meta.helm.sh/release-name: spire
+    meta.helm.sh/release-name: cray-spire
     meta.helm.sh/release-namespace: spire
-  name: spire-bundle
+  name: cray-spire-tokens
   namespace: spire
 spec:
   ports:
-    - name: http0
-      port: 8080
+    - name: https-cray-spire-tokens
+      port: 54440
       protocol: TCP
-      targetPort: 8080
+      targetPort: 54440
   sessionAffinity: None
   type: ClusterIP
