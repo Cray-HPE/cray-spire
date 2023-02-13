@@ -24,10 +24,10 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: cray-spire-postgres
+  name: spire-postgres
   namespace: spire
 spec:
   replicas: 1
-  serviceName: cray-spire-postgres
+  serviceName: spire-postgres
 status:
   readyReplicas: 1

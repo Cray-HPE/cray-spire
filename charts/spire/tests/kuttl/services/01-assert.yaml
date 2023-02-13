@@ -25,9 +25,9 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    meta.helm.sh/release-name: cray-spire
-    meta.helm.sh/release-namespace: cray-spire
-  name: cray-spire-jwks
+    meta.helm.sh/release-name: spire
+    meta.helm.sh/release-namespace: spire
+  name: spire-jwks
   namespace: spire
 spec:
   ports:
