@@ -180,6 +180,7 @@ data:
     create_if_new compute cpsmount_helper /opt/cray/cps-utils/bin/cpsmount_helper
     create_if_new compute dvs-hmi /usr/bin/dvs-hmi-spire-agent
     create_if_new compute dvs-map /usr/bin/dvs-map-spire-agent
+    create_if_new compute dvs-map /opt/cray/cray-spire/dvs-mqtt-spire-agent
     create_if_new compute heartbeat /usr/bin/heartbeat-spire-agent
     create_if_new compute orca /usr/bin/orca-spire-agent
     create_if_new compute wlm /usr/bin/wlm-spire-agent
@@ -190,6 +191,7 @@ data:
     create_if_new ncn cpsmount_helper /opt/cray/cps-utils/bin/cpsmount_helper
     create_if_new ncn dvs-hmi /usr/bin/dvs-hmi-spire-agent
     create_if_new ncn dvs-map /usr/bin/dvs-map-spire-agent
+    create_if_new ncn dvs-map /opt/cray/cray-spire/dvs-mqtt-spire-agent
     create_if_new ncn heartbeat /usr/bin/heartbeat-spire-agent
     create_if_new ncn orca /usr/bin/orca-spire-agent
 
@@ -204,6 +206,7 @@ data:
     create_if_new uan cpsmount_helper /opt/cray/cps-utils/bin/cpsmount_helper
     create_if_new uan dvs-hmi /usr/bin/dvs-hmi-spire-agent
     create_if_new uan dvs-map /usr/bin/dvs-map-spire-agent
+    create_if_new uan dvs-map /opt/cray/cray-spire/dvs-mqtt-spire-agent
     create_if_new uan heartbeat /usr/bin/heartbeat-spire-agent
     create_if_new uan orca /usr/bin/orca-spire-agent
     {{- end }}
