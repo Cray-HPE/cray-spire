@@ -170,6 +170,14 @@ data:
             value: gid:0
           - type: unix
             value: path:/opt/cray/cray-spire/dvs-map-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/workload/dvs-mqtt
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/dvs-mqtt-spire-agent
       - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/dvs-hmi
         selectors:
           - type: unix
@@ -358,6 +366,14 @@ data:
             value: gid:0
           - type: unix
             value: path:/opt/cray/cray-spire/dvs-map-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/workload/dvs-mqtt
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/dvs-mqtt-spire-agent
       - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/dvs-hmi
         selectors:
           - type: unix
@@ -588,6 +604,14 @@ data:
             value: gid:0
           - type: unix
             value: path:/opt/cray/cray-spire/dvs-map-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/workload/dvs-mqtt
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/dvs-mqtt-spire-agent
       - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/dvs-hmi
         selectors:
           - type: unix
