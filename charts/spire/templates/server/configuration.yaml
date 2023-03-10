@@ -220,6 +220,7 @@ data:
     create_if_new compute cpsmount_helper /opt/cray/cps-utils/bin/cpsmount_helper
     create_if_new compute dvs-hmi /opt/cray/cray-spire/dvs-hmi-spire-agent
     create_if_new compute dvs-map /opt/cray/cray-spire/dvs-map-spire-agent
+    create_if_new compute dvs-mqtt /opt/cray/cray-spire/dvs-mqtt-spire-agent
     create_if_new compute heartbeat /opt/cray/cray-spire/heartbeat-spire-agent
     create_if_new compute orca /opt/cray/cray-spire/orca-spire-agent
     create_if_new compute tpm-provisioner /opt/cray/cray-spire/tpm-provisioner
@@ -231,6 +232,7 @@ data:
     create_if_new ncn cpsmount_helper /opt/cray/cps-utils/bin/cpsmount_helper
     create_if_new ncn dvs-hmi /opt/cray/cray-spire/dvs-hmi-spire-agent
     create_if_new ncn dvs-map /opt/cray/cray-spire/dvs-map-spire-agent
+    create_if_new ncn dvs-mqtt /opt/cray/cray-spire/dvs-mqtt-spire-agent
     create_if_new ncn heartbeat /opt/cray/cray-spire/heartbeat-spire-agent
     create_if_new ncn orca /opt/cray/cray-spire/orca-spire-agent
     create_if_new ncn tpm-provisioner /opt/cray/cray-spire/tpm-provisioner
@@ -247,6 +249,7 @@ data:
     create_if_new uan cpsmount_helper /opt/cray/cps-utils/bin/cpsmount_helper
     create_if_new uan dvs-hmi /opt/cray/cray-spire/dvs-hmi-spire-agent
     create_if_new uan dvs-map /opt/cray/cray-spire/dvs-map-spire-agent
+    create_if_new uan dvs-mqtt /opt/cray/cray-spire/dvs-mqtt-spire-agent
     create_if_new uan heartbeat /opt/cray/cray-spire/heartbeat-spire-agent
     create_if_new uan orca /opt/cray/cray-spire/orca-spire-agent
     create_if_new uan tpm-provisioner /opt/cray/cray-spire/tpm-provisioner
