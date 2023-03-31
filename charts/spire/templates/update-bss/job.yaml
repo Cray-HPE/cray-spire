@@ -28,6 +28,8 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ template "spire.name" . }}-update-bss
 spec:
+  backoffLimit: 10
+  ttlSecondsAfterFinished: 86400
   template:
     metadata:
       labels:
@@ -35,7 +37,7 @@ spec:
     spec:
       serviceAccountName: {{ include "spire.fullname" . }}-update-bss
       containers:
-        - name: {{ template "spire.name" . }}-update-bss
+        - name: update-bss
           image: "{{ .Values.bss.curl.repository }}:{{ .Values.bss.curl.tag }}"
           command:
             - '/bin/sh'
@@ -43,8 +45,8 @@ spec:
             - '-c'
           args:
             - 'retries=1;
-               while ! curl -fv --request PATCH -H "Content-Type: application/json" -d @/conf/bss-update.json "$ENDPOINT";
-                 do if [ $retries -gt 9 ];
+               while ! curl --connect-timeout 15 -fv --request PATCH -H "Content-Type: application/json" -d @/conf/bss-update.json "$ENDPOINT";
+                 do if [ $retries -gt 20 ];
                    then echo "Failed to add spire entry to BSS";
                    exit 1;
                  fi;
@@ -63,4 +65,4 @@ spec:
       volumes:
         - name: conf
           configMap:
-            name: spire-bss-config
+            name: {{ include "spire.fullname" . }}-bss-config
