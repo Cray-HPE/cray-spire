@@ -58,12 +58,14 @@ data:
     }
 
     plugins {
+      {{- if ne .Values.server.tls "disable" }}
       UpstreamAuthority "disk" { plugin_data {
               cert_file_path = "/run/spire/tls/tls.crt"
               key_file_path = "/run/spire/tls/tls.key"
               bundle_file_path = "/run/spire/tls/ca.crt"
           }
       }
+      {{- end }}
 
       DataStore "sql" {
         plugin_data {

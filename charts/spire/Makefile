@@ -1,7 +1,7 @@
 #
 # MIT License
 #
-# (C) Copyright [2022] Hewlett Packard Enterprise Development LP
+# (C) Copyright 2022-2023 Hewlett Packard Enterprise Development LP
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -24,10 +24,10 @@
 current_dir := $(shell pwd)
 tmp_dir := $(shell mktemp -d)
 
-.SILENT: helmlint eval test unittest
-.PHONY: helmlint eval test unittest
+.SILENT: helmlint eval kuttl kuttl-clean kuttl-keep unittest
+.PHONY: helmlint eval kuttl kuttl-clean kuttl-keep unittest
 
-all: helmlint eval unittest test
+all: helmlint eval unittest kuttl
 
 lint: helmlint eval unittest
 
@@ -37,5 +37,11 @@ eval:
 helmlint:
 	helm lint
 
-test:
-	kubectl kuttl test --kind-config kind.yaml --artifacts-dir /tmp/kuttl
+kuttl:
+	kubectl kuttl test
+
+kuttl-keep:
+	kubectl kuttl test --skip-cluster-delete --skip-delete
+
+kuttl-clean:
+	kind delete cluster

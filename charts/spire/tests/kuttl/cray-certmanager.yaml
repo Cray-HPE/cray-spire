@@ -21,8 +21,20 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 #
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-nodes:
-  - role: control-plane
-    image: kindest/node:v1.21.12@sha256:05eefdedfcb6113402ac631782adfa3d9f8b75c38eac783e3da4f44f6404dae0
+# Required for the webhook certificate to match the 'cray' overlay service name
+# Also updated in the cray-certmanager-init CRDs (*...webhookClientConfig.service instances)
+
+# ExtraArgs (--enable-certificate-owner-ref=true) used to delete TLS key material (K8S secret)
+# when certificate is deleted
+# https://github.com/jetstack/cert-manager/pull/1828
+
+kubectl:
+  image:
+    repository: artifactory.algol60.net/csm-docker/stable/docker-kubectl
+
+cert-manager:
+   replicaCount: 1
+   webhook:
+      replicaCount: 1
+   cainjector:
+      replicaCount: 1
