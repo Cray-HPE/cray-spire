@@ -32,6 +32,7 @@ trustDomain: shasta
 vshasta: false
 
 server:
+  tls: enable
   replicaCount: 3
   lbIP: "10.92.100.82"
   fqdn: spire.local
