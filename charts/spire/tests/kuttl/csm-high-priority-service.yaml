@@ -1,7 +1,7 @@
 #
 # MIT License
 #
-# (C) Copyright 2022-2023 Hewlett Packard Enterprise Development LP
+# (C) Copyright 2023 Hewlett Packard Enterprise Development LP
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -21,8 +21,10 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 #
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-nodes:
-  - role: control-plane
-    image: kindest/node:v1.21.12@sha256:05eefdedfcb6113402ac631782adfa3d9f8b75c38eac783e3da4f44f6404dae0
+apiVersion: scheduling.k8s.io/v1
+description: This priority class should be used for CSM critical service pods only.
+kind: PriorityClass
+metadata:
+  name: csm-high-priority-service
+preemptionPolicy: PreemptLowerPriority
+value: 1000000

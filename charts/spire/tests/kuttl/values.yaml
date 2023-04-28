@@ -1,7 +1,7 @@
 #
 # MIT License
 #
-# (C) Copyright [2022] Hewlett Packard Enterprise Development LP
+# (C) Copyright 2022-2023 Hewlett Packard Enterprise Development LP
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -21,36 +21,23 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 #
+vshasta: true
+
 server:
-  priorityClassName: ""
-  disableServiceMonitor: true
   replicaCount: 1
-  init:
-    repository: artifactory.algol60.net/csm-docker/stable/sdlc-ops/wait-for-it
-    tag: "1.0.0"
-
-  init2:
-    repository: artifactory.algol60.net/docker.io/alpine
-
-  registration:
-    repository: artifactory.algol60.net/csm-docker/stable/spire-tokens
-
   disableExternalCerts: true
+  tls: disable
 
-agent:
-  init:
-    repository: artifactory.algol60.net/csm-docker/stable/sdlc-ops/wait-for-it
-    tag: "1.0.0"
+jwks:
+  replicaCount: 1
 
 cray-service:
   sqlCluster:
+    tls:
+      enabled: false
     instanceCount: 1
     connectionPooler:
-      # Due to how we map images to dtr.dev.cray.com this cannot work locally
-      # without being able to override the whole postgres image name in the
-      # spire-create-pooler-schema job
       enabled: false
-    podPriorityClassName: ""
     resources:
       limits:
         cpu: 100m
@@ -58,22 +45,3 @@ cray-service:
       requests:
         cpu: 100m
         memory: 128Mi
-
-
-  init:
-    repository: artifactory.algol60.net/csm-docker/stable/sdlc-ops/wait-for-it
-    tag: "1.0.0"
-
-jwks:
-  replicaCount: 1
-  priorityClassName: ""
-
-  image:
-    repository: arti.dev.cray.com/csm-docker-stable-local/cray-spire-jwks
-  nginx:
-    repository: nginx
-
-ncn:
-  init:
-    repository: artifactory.algol60.net/docker.io/alpine
-
