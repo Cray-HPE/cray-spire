@@ -23,7 +23,7 @@
 #
 {{- $root := . -}}
 ---
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: "{{ include "spire.fullname" $root }}-tokens-tls"
@@ -33,9 +33,10 @@ spec:
   renewBefore: 24h
   commonName: "{{ include "spire.fullname" $root }}-tokens.{{ .Release.Namespace }}.cluster.svc"
   isCA: false
-  keySize: 4096
-  keyAlgorithm: rsa
-  keyEncoding: pkcs1
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 4096
   usages:
     - server auth
   dnsNames:
