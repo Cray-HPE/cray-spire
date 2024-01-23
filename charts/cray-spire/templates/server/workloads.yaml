@@ -1,7 +1,7 @@
 #
 # MIT License
 #
-# (C) Copyright [2022] Hewlett Packard Enterprise Development LP
+# (C) Copyright 2022-2024 Hewlett Packard Enterprise Development LP
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -178,6 +178,14 @@ data:
             value: gid:0
           - type: unix
             value: path:/opt/cray/cray-spire/dvs-map-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/workload/dvs-mqtt
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/dvs-mqtt-spire-agent
       - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/dvs-hmi
         selectors:
           - type: unix
@@ -374,6 +382,14 @@ data:
             value: gid:0
           - type: unix
             value: path:/opt/cray/cray-spire/dvs-map-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/workload/dvs-mqtt
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/dvs-mqtt-spire-agent
       - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/dvs-hmi
         selectors:
           - type: unix
@@ -612,6 +628,14 @@ data:
             value: gid:0
           - type: unix
             value: path:/opt/cray/cray-spire/dvs-map-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/workload/dvs-mqtt
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/dvs-mqtt-spire-agent
       - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/dvs-hmi
         selectors:
           - type: unix
