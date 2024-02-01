@@ -128,14 +128,14 @@ data:
       ttl=$4
 
       if [ "$ttl" ]; then
-        if ! ./bin/spire-server entry show -spiffeID "spiffe://shasta/${type}/workload/${workload}" -ttl ${ttl} -selector "unix:path:${agentPath}" | grep -q "spiffe://shasta/${type}/workload/${workload}"; then
+        if ! ./bin/spire-server entry show -spiffeID "spiffe://shasta/${type}/workload/${workload}" -jwtSVIDTTL ${ttl} -selector "unix:path:${agentPath}" | grep -q "spiffe://shasta/${type}/workload/${workload}"; then
           ./bin/spire-server entry create \
             -parentID spiffe://{{ .Values.trustDomain }}/${type} \
             -spiffeID spiffe://{{ .Values.trustDomain }}/${type}/workload/${workload} \
             -selector unix:uid:0 \
             -selector unix:gid:0 \
             -selector unix:path:${agentPath} \
-            -ttl ${ttl} || echo "Entry creation failed: $@"
+            -jwtSVIDTTL ${ttl} || echo "Entry creation failed: $@"
         else
           echo "Entry already exists: $@"
         fi
