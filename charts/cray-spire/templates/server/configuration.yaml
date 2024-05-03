@@ -1,7 +1,7 @@
 {{/*
 MIT License
 
-(C) Copyright 2022-2023 Hewlett Packard Enterprise Development LP
+(C) Copyright 2022-2024 Hewlett Packard Enterprise Development LP
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),
@@ -202,6 +202,7 @@ data:
     create_if_new ncn dvs-map /usr/bin/dvs-map-spire-agent
     create_if_new ncn heartbeat /usr/bin/heartbeat-spire-agent
     create_if_new ncn orca /usr/bin/orca-spire-agent
+    create_if_new ncn sbps-marshal /usr/bin/sbps-marshal-spire-agent
 
     create_if_new storage cfs-state-reporter /usr/bin/cfs-state-reporter-spire-agent
     create_if_new storage heartbeat /usr/bin/heartbeat-spire-agent
@@ -244,6 +245,7 @@ data:
     create_if_new ncn heartbeat /opt/cray/cray-spire/heartbeat-spire-agent
     create_if_new ncn orca /opt/cray/cray-spire/orca-spire-agent
     create_if_new ncn tpm-provisioner /opt/cray/cray-spire/tpm-provisioner-client
+    create_if_new ncn sbps-marshal /opt/cray/cray-spire/sbps-marshal-spire-agent
 
     create_if_new storage cfs-state-reporter /opt/cray/cray-spire/cfs-state-reporter-spire-agent
     create_if_new storage heartbeat /opt/cray/cray-spire/heartbeat-spire-agent
