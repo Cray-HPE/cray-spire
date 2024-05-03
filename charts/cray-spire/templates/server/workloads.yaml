@@ -113,7 +113,7 @@ data:
             value: gid:0
           - type: unix
             value: path:/usr/bin/heartbeat-spire-agent
-      - spiffeID: spiffe://shasta/ncn/workload/sbps-marshal
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/workload/sbps-marshal
         selectors:
           - type: unix
             value: uid:0
@@ -218,7 +218,7 @@ data:
             value: gid:0
           - type: unix
             value: path:/opt/cray/cray-spire/tpm-provisioner
-       - spiffeID: spiffe://shasta/ncn/workload/sbps-marshal
+       - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/workload/sbps-marshal
          selectors:
            - type: unix
              value: uid:0
