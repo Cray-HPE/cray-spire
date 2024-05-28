@@ -23,7 +23,7 @@
 ---
 apiVersion: v2
 name: cray-spire
-version: 1.6.0
+version: 1.6.1
 description: A Helm chart for spire
 home: https://github.com/Cray-HPE/cray-spire
 dependencies:
@@ -53,8 +53,6 @@ annotations:
       image: artifactory.algol60.net/csm-docker/stable/k8s.gcr.io/pause:3.4.1
     - name: postgres
       image: artifactory.algol60.net/csm-docker/stable/docker.io/library/postgres:13.2-alpine
-    - name: postgres-db-backup
-      image: artifactory.algol60.net/csm-docker/stable/cray-postgres-db-backup:0.2.3
     - name: spire-server
       image: artifactory.algol60.net/csm-docker/stable/gcr.io/spiffe-io/spire-server:1.5.5
     - name: spire-agent
