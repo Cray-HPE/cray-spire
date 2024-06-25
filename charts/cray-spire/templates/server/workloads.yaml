@@ -178,7 +178,7 @@ data:
             value: gid:0
           - type: unix
             value: path:/opt/cray/cray-spire/dvs-map-spire-agent
-      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/workload/dvs-mqtt
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/XNAME/workload/dvs-mqtt
         selectors:
           - type: unix
             value: uid:0
@@ -382,7 +382,7 @@ data:
             value: gid:0
           - type: unix
             value: path:/opt/cray/cray-spire/dvs-map-spire-agent
-      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/workload/dvs-mqtt
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/dvs-mqtt
         selectors:
           - type: unix
             value: uid:0
@@ -628,7 +628,7 @@ data:
             value: gid:0
           - type: unix
             value: path:/opt/cray/cray-spire/dvs-map-spire-agent
-      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/workload/dvs-mqtt
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/dvs-mqtt
         selectors:
           - type: unix
             value: uid:0
