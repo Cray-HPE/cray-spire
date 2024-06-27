@@ -53,6 +53,8 @@ spec:
         # this toleration is to have the daemonset runnable on master nodes
         - key: node-role.kubernetes.io/master
           effect: NoSchedule
+        - key: node-role.kubernetes.io/control-plane
+          effect: NoSchedule
       initContainers:
         - name: init-setperms
           image: "{{ .Values.ncn.init.repository }}:{{ .Values.ncn.init.tag }}"
