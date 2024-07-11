@@ -23,8 +23,8 @@
 #
 {{- if not .Values.server.disableServiceMonitor }}
 ---
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
 metadata:
   name: cray-sysmgmt-health-{{ include "spire.fullname" . }}-server
   namespace: sysmgmt-health
