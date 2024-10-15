@@ -1,0 +1,92 @@
+{{/*
+MIT License
+
+(C) Copyright 2024 Hewlett Packard Enterprise Development LP
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the "Software"),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+*/}}
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ template "spire.fullname" . }}-registration-hook
+rules:
+  - apiGroups: ["apps"]
+    resources: ["statefulsets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list"]
+  - apiGroups: [""]
+    resources: ["pods/exec"]
+    verbs: ["create"]
+
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: {{ template "spire.fullname" . }}-registration-hook
+
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ template "spire.fullname" . }}-registration-hook
+subjects:
+  - kind: ServiceAccount
+    name: {{ template "spire.fullname" . }}-registration-hook
+roleRef:
+  kind: Role
+  name: {{ template "spire.fullname" . }}-registration-hook
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "spire.fullname" . }}-registration-hook
+  labels:
+{{ include "spire.common-labels" . | indent 4 }}
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  template:
+    metadata:
+      name: {{ template "spire.fullname" . }}-registration-hook
+      labels:
+{{ include "spire.common-labels" . | indent 8 }}
+      annotations:
+        sidecar.istio.io/inject: "false"
+    spec:
+      serviceAccountName: {{ template "spire.fullname" . }}-registration-hook
+      restartPolicy: Never
+      containers:
+        - name: post-install-registration-job
+          image: {{ .Values.kubectl.image.repository }}:{{ .Values.kubectl.image.tag }}
+          imagePullPolicy: {{ .Values.kubectl.image.pullPolicy }}
+          command:
+            - /bin/sh
+            - -c
+            - kubectl rollout status sts -n {{ .Release.Namespace }} {{ include "spire.fullname" . }}-server &&
+                kubectl exec -n {{ .Release.Namespace }} {{ include "spire.fullname" . }}-server-0 -c spire-server -- /bin/sh /run/spire/config/register
+          securityContext:
+            runAsGroup: 65534
+            runAsNonRoot: true
+            runAsUser: 65534
