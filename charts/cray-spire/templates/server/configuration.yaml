@@ -152,7 +152,10 @@ data:
     fi
 
     spiffe_id="spiffe://{{ .Values.trustDomain }}/spire-jwks"
-    selectors="-selector k8s:ns:{{ .Release.Namespace }} -selector k8s:sa:{{ include "spire.fullname" . }}-jwks -selector k8s:pod-label:app.kubernetes.io/name:{{ include "spire.fullname" . }}-jwks -selector k8s:container-name:jwks"
+    selectors="-selector k8s:ns:{{ .Release.Namespace }} \
+        -selector k8s:sa:{{ include "spire.fullname" . }}-jwks \
+        -selector k8s:pod-label:app.kubernetes.io/name:{{ include "spire.fullname" . }}-jwks \
+        -selector k8s:container-name:jwks"
     if ! /opt/spire/bin/spire-server entry show -spiffeID "${spiffe_id}" ${selectors} | grep -q -w "${spiffe_id}"; then
       /opt/spire/bin/spire-server entry create \
         -parentID spiffe://{{ .Values.trustDomain }}/cluster \
