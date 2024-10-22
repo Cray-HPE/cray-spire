@@ -1,7 +1,7 @@
 {{/*
 MIT License
 
-(C) Copyright 2022-2023 Hewlett Packard Enterprise Development LP
+(C) Copyright 2022-2024 Hewlett Packard Enterprise Development LP
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),
@@ -122,12 +122,6 @@ spec:
             - name: grpc
               containerPort: {{ .Values.server.port }}
               protocol: TCP
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - "/bin/sh"
-                  - "/run/spire/config/register"
           livenessProbe:
             tcpSocket:
               port: grpc
