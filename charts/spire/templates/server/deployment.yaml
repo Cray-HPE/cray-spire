@@ -122,12 +122,6 @@ spec:
             - name: grpc
               containerPort: {{ .Values.server.port }}
               protocol: TCP
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - "/bin/sh"
-                  - "/run/spire/config/register"
           livenessProbe:
             tcpSocket:
               port: grpc
