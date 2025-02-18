@@ -35,7 +35,6 @@ spec:
       labels:
         app.kubernetes.io/name: {{ template "spire.name" . }}-update-bss
     spec:
-      serviceAccountName: {{ include "spire.fullname" . }}-update-bss
       containers:
         - name: update-bss
           image: "{{ .Values.bss.curl.repository }}:{{ .Values.bss.curl.tag }}"
