@@ -23,7 +23,7 @@
 ---
 apiVersion: v2
 name: cray-spire
-version: 1.7.0
+version: 1.7.1
 description: A Helm chart for spire
 home: https://github.com/Cray-HPE/cray-spire
 dependencies:
@@ -37,8 +37,6 @@ annotations:
   artifacthub.io/images: |-
     - name: cray-spire-jwks
       image: artifactory.algol60.net/csm-docker/stable/cray-spire-jwks:0.4.0
-    - name: spire-bundle
-      image: artifactory.algol60.net/csm-docker/stable/spire-bundle:0.2.0
     - name: spire-tokens
       image: artifactory.algol60.net/csm-docker/stable/spire-tokens:3.3.1
     - name: wait-for-it
