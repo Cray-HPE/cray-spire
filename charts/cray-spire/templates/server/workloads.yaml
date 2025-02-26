@@ -218,14 +218,14 @@ data:
             value: gid:0
           - type: unix
             value: path:/opt/cray/cray-spire/tpm-provisioner
-       - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/workload/sbps-marshal
-         selectors:
-           - type: unix
-             value: uid:0
-           - type: unix
-             value: gid:0
-           - type: unix
-             value: path:/opt/cray/cray-spire/sbps-marshal-spire-agent
+      - spiffeID: spiffe://{{ .Values.trustDomain }}/ncn/workload/sbps-marshal
+        selectors:
+          - type: unix
+            value: uid:0
+          - type: unix
+            value: gid:0
+          - type: unix
+            value: path:/opt/cray/cray-spire/sbps-marshal-spire-agent
   compute.yaml: |-
       ---
       - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/cpsmount_helper
