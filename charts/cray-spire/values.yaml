@@ -121,7 +121,7 @@ tls:
   issuer: cert-manager-issuer-common
 
 agent:
-  logLevel: INFO
+  logLevel: WARN
   wlSocket: /run/cray-spire/sockets
 
   init:
