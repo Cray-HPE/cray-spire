@@ -268,6 +268,7 @@ data:
             value: gid:0
           - type: unix
             value: path:/usr/bin/ckdump_helper
+        jwtSVIDTTL: 864000
       - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/ckdump
         selectors:
           - type: unix
@@ -365,6 +366,7 @@ data:
             value: gid:0
           - type: unix
             value: path:/opt/cray/cray-spire/ckdump_helper
+        jwtSVIDTTL: 864000
       - spiffeID: spiffe://{{ .Values.trustDomain }}/compute/XNAME/workload/ckdump
         selectors:
           - type: unix
@@ -522,6 +524,7 @@ data:
             value: gid:0
           - type: unix
             value: path:/usr/bin/ckdump_helper
+        jwtSVIDTTL: 864000
       - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/ckdump
         selectors:
           - type: unix
@@ -611,6 +614,7 @@ data:
             value: gid:0
           - type: unix
             value: path:/opt/cray/cray-spire/ckdump_helper
+        jwtSVIDTTL: 864000
       - spiffeID: spiffe://{{ .Values.trustDomain }}/uan/XNAME/workload/ckdump
         selectors:
           - type: unix
