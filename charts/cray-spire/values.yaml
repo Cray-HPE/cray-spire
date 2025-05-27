@@ -89,7 +89,7 @@ cray-postgresql:
   sqlCluster:
     enabled: true
     instanceCount: 3
-    postgresVersion: "11"
+    postgresVersion: "15"
     volumeSize: 60Gi
     podPriorityClassName: csm-high-priority-service
     users:
@@ -175,7 +175,7 @@ ncn:
     tag: 7.80.0
   pause:
     repository: artifactory.algol60.net/csm-docker/stable/registry.k8s.io/pause
-    tag: 3.7
+    tag: "3.10"
 
 kubectl:
   image:
